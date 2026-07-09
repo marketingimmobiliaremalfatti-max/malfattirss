@@ -138,6 +138,31 @@ def extract_description(soup, jsonld):
         return tag["content"].strip()
     if jsonld and jsonld.get("description"):
         return jsonld["description"]
+
+    # Ultimo fallback: nessun meta-tag disponibile -> cerca nel testo visibile
+    # della pagina il blocco più lungo e verosimilmente descrittivo,
+    # escludendo footer/cookie/copyright e testi troppo corti.
+    BLOCKLIST = (
+        "cookie", "privacy", "copyright", "tutti i diritti",
+        "p.iva", "partita iva", "iscriviti alla newsletter",
+    )
+    candidates = []
+    for tag_name in ("p", "div", "span"):
+        for el in soup.find_all(tag_name):
+            # Salta i contenitori che hanno figli con lo stesso tag (evita di
+            # prendere blocchi troppo grandi che includono l'intera pagina)
+            if el.find(tag_name):
+                continue
+            text = el.get_text(" ", strip=True)
+            if len(text) < 80:
+                continue
+            if any(b in text.lower() for b in BLOCKLIST):
+                continue
+            candidates.append(text)
+
+    if candidates:
+        return max(candidates, key=len)
+
     return ""
 
 
