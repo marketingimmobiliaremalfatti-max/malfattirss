@@ -6,9 +6,8 @@ per la pubblicazione automatica su Facebook/Instagram.
 Come funziona:
 1. Scarica le pagine di elenco annunci del sito pubblico.
 2. Per ogni annuncio trovato, apre la pagina di dettaglio e legge i meta tag
-   Open Graph (og:title, og:description, og:image) che il sito già espone
-   per le anteprime social -> è la fonte più stabile possibile, perché non
-   dipende dalla struttura grafica interna della pagina.
+   (Open Graph, standard SEO, o dati strutturati JSON-LD) per estrarre
+   titolo, descrizione e immagine, con vari livelli di fallback.
 3. Mantiene uno stato persistente (data/state.json) con la data di "prima
    vista" di ogni annuncio, così il feed RSS ha date stabili nel tempo e
    Postpikr non ripubblica lo stesso annuncio più volte.
@@ -29,10 +28,6 @@ from feedgen.feed import FeedGenerator
 
 BASE_URL = "https://www.immobiliaremalfatti.it/"
 
-# Categorie di annunci da includere. I codici tipoOfferta sono quelli usati
-# dal motore di ricerca del sito (Real Software / Realsmart). Se il sito
-# aggiunge altre categorie, basta aggiungere altre voci qui.
-# NB: "n" = risultati per pagina, "p" = numero di pagina (parte da 1).
 RESULTS_PER_PAGE = 20
 LIST_URLS = [
     f"elenco.aspx?tipoOfferta=33&prezzo=0&ric_libera=&n={RESULTS_PER_PAGE}&ord=0&contratto=0&comune=0",  # vendita residenziale
@@ -41,15 +36,32 @@ LIST_URLS = [
 
 STATE_FILE = Path(__file__).parent / "data" / "state.json"
 OUTPUT_FILE = Path(__file__).parent / "docs" / "rss.xml"
-MAX_ITEMS_IN_FEED = 60  # numero massimo di annunci mantenuti nel feed
+MAX_ITEMS_IN_FEED = 60
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; MalfattiRSSBot/1.0; +https://www.immobiliaremalfatti.it/)"
 }
 
-# Pattern che identifica gli URL delle pagine di dettaglio annuncio,
-# es: "Villa-in-vendita-roma-Rieti-T521.aspx"
 DETAIL_URL_PATTERN = re.compile(r"[A-Za-z0-9\-]+-T\d+\.aspx$")
+
+
+def title_from_slug(url):
+    slug = url.rstrip("/").split("/")[-1]
+    slug = re.sub(r"\.aspx$", "", slug, flags=re.IGNORECASE)
+    slug = re.sub(r"-{2,}", " / ", slug)
+    slug = slug.replace("-", " ")
+    tokens = [t for t in slug.split(" ") if t]
+
+    if tokens and re.match(r"^T\d+$", tokens[-1], flags=re.IGNORECASE):
+        tokens.pop()
+
+    tokens = [t for t in tokens if t.lower() != "roma"]
+
+    if not tokens:
+        return None
+
+    title = " ".join(tokens)
+    return title[0].upper() + title[1:]
 
 
 def fetch(url, retries=3, pause=2):
@@ -65,7 +77,6 @@ def fetch(url, retries=3, pause=2):
 
 
 def discover_listing_urls():
-    """Scansiona le pagine di elenco e restituisce l'insieme di URL di dettaglio trovati."""
     urls = set()
     for list_url in LIST_URLS:
         full_url = urljoin(BASE_URL, list_url)
@@ -88,13 +99,10 @@ def discover_listing_urls():
 
             print(f"  pagina {page} ({paged_url}): {len(page_urls)} annunci unici sulla pagina, {len(new_urls)} nuovi")
 
-            # Si ferma quando la pagina non ha annunci, o ne ha meno del
-            # numero massimo per pagina (ultima pagina), o non porta nulla
-            # di nuovo (evita loop se il sito ignora "p" oltre un certo limite).
             if len(page_urls) == 0 or len(page_urls) < RESULTS_PER_PAGE or len(new_urls) == 0:
                 break
             page += 1
-            if page > 30:  # limite di sicurezza anti-loop infinito
+            if page > 30:
                 break
 
     return sorted(urls)
@@ -105,20 +113,74 @@ def extract_meta(soup, prop):
     return tag["content"].strip() if tag and tag.get("content") else None
 
 
+def extract_jsonld(soup):
+    for script in soup.find_all("script", type="application/ld+json"):
+        if not script.string:
+            continue
+        try:
+            data = json.loads(script.string)
+        except (json.JSONDecodeError, TypeError):
+            continue
+        if isinstance(data, list) and data:
+            return data[0]
+        if isinstance(data, dict):
+            return data
+    return None
+
+
+def extract_description(soup, jsonld):
+    for prop in ("og:description", "twitter:description"):
+        val = extract_meta(soup, prop)
+        if val:
+            return val
+    tag = soup.find("meta", attrs={"name": "description"})
+    if tag and tag.get("content"):
+        return tag["content"].strip()
+    if jsonld and jsonld.get("description"):
+        return jsonld["description"]
+    return ""
+
+
+def extract_image(soup, jsonld, page_url):
+    for prop in ("og:image", "twitter:image", "twitter:image:src"):
+        val = extract_meta(soup, prop)
+        if val:
+            return urljoin(page_url, val)
+
+    if jsonld:
+        img = jsonld.get("image")
+        if isinstance(img, list) and img:
+            img = img[0]
+        if isinstance(img, dict):
+            img = img.get("url")
+        if img:
+            return urljoin(page_url, img)
+
+    for img in soup.find_all("img", src=True):
+        src = img["src"]
+        if any(x in src.lower() for x in ("logo", "icon", "favicon", "sprite")):
+            continue
+        return urljoin(page_url, src)
+
+    return None
+
+
 def scrape_listing(url):
-    """Estrae i dati di un singolo annuncio dalla sua pagina di dettaglio."""
     html = fetch(url)
     if not html:
         return None
 
     soup = BeautifulSoup(html, "html.parser")
 
-    title = extract_meta(soup, "og:title") or (soup.title.string.strip() if soup.title else url)
-    description = extract_meta(soup, "og:description") or ""
-    image = extract_meta(soup, "og:image")
+    slug_title = title_from_slug(url)
+    og_title = extract_meta(soup, "og:title")
+    title = slug_title or og_title or (soup.title.string.strip() if soup.title else url)
+
+    jsonld = extract_jsonld(soup)
+    description = extract_description(soup, jsonld)
+    image = extract_image(soup, jsonld, url)
     canonical = extract_meta(soup, "og:url") or url
 
-    # Estrae un identificativo stabile dall'URL, es: T521
     m = re.search(r"-T(\d+)\.aspx", url)
     listing_id = m.group(1) if m else url
 
@@ -144,13 +206,12 @@ def save_state(state):
 
 def build_feed(listings_with_dates):
     fg = FeedGenerator()
-    fg.load_extension("media")  # per media:content, alcuni lettori RSS lo preferiscono all'enclosure
+    fg.load_extension("media")
     fg.title("Immobiliare Malfatti - Annunci")
     fg.link(href=BASE_URL, rel="alternate")
     fg.description("Feed automatico degli annunci pubblicati su immobiliaremalfatti.it")
     fg.language("it")
 
-    # Ordina dal più recente al più vecchio
     listings_with_dates.sort(key=lambda x: x["first_seen"], reverse=True)
 
     for item in listings_with_dates[:MAX_ITEMS_IN_FEED]:
@@ -214,7 +275,6 @@ def main():
 
         listings_with_dates.append({**data, "first_seen": first_seen})
 
-    # Rimuove dallo stato gli annunci non più presenti sul sito (venduti/rimossi)
     removed = set(state.keys()) - seen_ids
     for rid in removed:
         print(f"  [RIMOSSO] {state[rid]['title']}")
