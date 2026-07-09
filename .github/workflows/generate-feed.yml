@@ -25,6 +25,8 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Esegui lo scraper e genera il feed
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python scraper.py
 
       - name: Commit e push se ci sono cambiamenti
