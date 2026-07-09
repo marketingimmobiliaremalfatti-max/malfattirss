@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+  <channel>
+    <title>Immobiliare Malfatti - Annunci</title>
+    <link>https://www.immobiliaremalfatti.it/</link>
+    <description>Feed automatico degli annunci pubblicati su immobiliaremalfatti.it</description>
+    <docs>http://www.rssboard.org/rss-specification</docs>
+    <generator>python-feedgen</generator>
+    <language>it</language>
+    <lastBuildDate>Thu, 09 Jul 2026 07:51:38 +0000</lastBuildDate>
+    <item>
+      <title>MALFATTI IMMOBILIARE - Immobile</title>
+      <link>https://www.immobiliaremalfatti.it/Villa-in-vendita-roma-Rieti-T521.aspx</link>
+      <guid isPermaLink="true">https://www.immobiliaremalfatti.it/Villa-in-vendita-roma-Rieti-T521.aspx</guid>
+      <pubDate>Thu, 09 Jul 2026 07:51:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>MALFATTI IMMOBILIARE - Immobile</title>
+      <link>https://www.immobiliaremalfatti.it/Villa-in-vendita-roma-Rieti-T438.aspx</link>
+      <guid isPermaLink="true">https://www.immobiliaremalfatti.it/Villa-in-vendita-roma-Rieti-T438.aspx</guid>
+      <pubDate>Thu, 09 Jul 2026 07:51:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>MALFATTI IMMOBILIARE - Immobile</title>
+      <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T448.aspx</link>
+      <guid isPermaLink="true">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T448.aspx</guid>
+      <pubDate>Thu, 09 Jul 2026 07:51:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>MALFATTI IMMOBILIARE - Immobile</title>
+      <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T211.aspx</link>
+      <guid isPermaLink="true">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T211.aspx</guid>
+      <pubDate>Thu, 09 Jul 2026 07:51:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>MALFATTI IMMOBILIARE - Immobile</title>
+      <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Greccio-T604.aspx</link>
+      <guid isPermaLink="true">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Greccio-T604.aspx</guid>
+      <pubDate>Thu, 09 Jul 2026 07:51:34 +0000</pubDate>
+    </item>
+  </channel>
+</rss>
