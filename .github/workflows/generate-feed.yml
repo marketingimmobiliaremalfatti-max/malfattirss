@@ -1,0 +1,36 @@
+name: Aggiorna feed RSS Immobiliare Malfatti
+
+on:
+  schedule:
+    # Ogni 4 ore. Modifica il cron se vuoi una frequenza diversa.
+    - cron: "0 */4 * * *"
+  workflow_dispatch: {} # permette di far partire il workflow manualmente da GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Installa le dipendenze
+        run: pip install -r requirements.txt
+
+      - name: Esegui lo scraper e genera il feed
+        run: python scraper.py
+
+      - name: Commit e push se ci sono cambiamenti
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/rss.xml data/state.json
+          git diff --staged --quiet || git commit -m "Aggiorna feed RSS annunci [automatico]"
+          git push
