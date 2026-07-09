@@ -523,6 +523,15 @@ def main():
         if not data:
             continue
 
+        # Controllo di sicurezza aggiuntivo: lo slug trovato nella pagina
+        # elenco e l'URL/titolo definitivo della pagina di dettaglio a volte
+        # differiscono (es. il sito usa testi leggermente diversi per lo
+        # stesso annuncio). Ricontrolliamo qui con i dati più autorevoli,
+        # così un negozio/terreno/garage/affitto non sfugge al filtro.
+        if is_excluded_listing(data["url"]) or is_excluded_listing(data["title"]):
+            print(f"  [ESCLUSO] {data['title']} ({data['url']}) -- rilevato dopo lo scraping")
+            continue
+
         listing_id = data["id"]
         seen_ids.add(listing_id)
         previous = state.get(listing_id, {})
