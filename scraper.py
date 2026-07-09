@@ -32,9 +32,11 @@ BASE_URL = "https://www.immobiliaremalfatti.it/"
 # Categorie di annunci da includere. I codici tipoOfferta sono quelli usati
 # dal motore di ricerca del sito (Real Software / Realsmart). Se il sito
 # aggiunge altre categorie, basta aggiungere altre voci qui.
+# NB: "n" = risultati per pagina, "p" = numero di pagina (parte da 1).
+RESULTS_PER_PAGE = 20
 LIST_URLS = [
-    "elenco.aspx?tipoOfferta=33&comune=0&prezzo=0&ric_libera=&zona=0&contratto=0",  # vendita residenziale
-    "elenco.aspx?tipoOfferta=34&comune=0&prezzo=0&ric_libera=&zona=0&contratto=0",  # affitto residenziale
+    f"elenco.aspx?tipoOfferta=33&prezzo=0&ric_libera=&n={RESULTS_PER_PAGE}&ord=0&contratto=0&comune=0",  # vendita residenziale
+    f"elenco.aspx?tipoOfferta=34&prezzo=0&ric_libera=&n={RESULTS_PER_PAGE}&ord=0&contratto=0&comune=0",  # affitto residenziale
 ]
 
 STATE_FILE = Path(__file__).parent / "data" / "state.json"
@@ -69,24 +71,27 @@ def discover_listing_urls():
         full_url = urljoin(BASE_URL, list_url)
         page = 1
         while True:
-            # Il sito pagina con un parametro tipo &pagina=N -- se il sito usa
-            # un parametro diverso, questa parte va adattata dopo il primo test reale.
-            paged_url = full_url + (f"&pagina={page}" if page > 1 else "")
+            paged_url = f"{full_url}&p={page}"
             html = fetch(paged_url)
             if not html:
                 break
 
             soup = BeautifulSoup(html, "html.parser")
-            found_this_page = 0
+            page_urls = set()
             for a in soup.find_all("a", href=True):
                 href = a["href"]
                 if DETAIL_URL_PATTERN.search(href):
-                    urls.add(urljoin(BASE_URL, href))
-                    found_this_page += 1
+                    page_urls.add(urljoin(BASE_URL, href))
 
-            print(f"  pagina {page} ({paged_url}): {found_this_page} annunci trovati")
+            new_urls = page_urls - urls
+            urls |= page_urls
 
-            if found_this_page == 0:
+            print(f"  pagina {page} ({paged_url}): {len(page_urls)} annunci unici sulla pagina, {len(new_urls)} nuovi")
+
+            # Si ferma quando la pagina non ha annunci, o ne ha meno del
+            # numero massimo per pagina (ultima pagina), o non porta nulla
+            # di nuovo (evita loop se il sito ignora "p" oltre un certo limite).
+            if len(page_urls) == 0 or len(page_urls) < RESULTS_PER_PAGE or len(new_urls) == 0:
                 break
             page += 1
             if page > 30:  # limite di sicurezza anti-loop infinito
