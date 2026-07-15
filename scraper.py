@@ -491,7 +491,7 @@ def build_feed(listings_with_dates):
         fe.pubDate(pub_date)
 
         raw_caption = item.get("caption") or item["description"] or ""
-        desc_html = raw_caption.replace("\n", "<br/>")
+        desc_html = raw_caption.replace("\n", "<br/>\n")
         if item.get("image"):
             desc_html = f'<img src="{item["image"]}" /><br/>{desc_html}'
         fe.description(desc_html)
