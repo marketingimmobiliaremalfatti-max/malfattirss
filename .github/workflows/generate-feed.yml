@@ -33,6 +33,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/rss.xml data/state.json
+          git add docs/rss.xml docs/images/ data/state.json
           git diff --staged --quiet || git commit -m "Aggiorna feed RSS annunci [automatico]"
           git push
