@@ -3,7 +3,7 @@ name: Aggiorna feed RSS Immobiliare Malfatti
 on:
   schedule:
     # Ogni 4 ore. Modifica il cron se vuoi una frequenza diversa.
-    - cron: "0 */4 * * *"
+    - cron: "0 6 * * 1"
   workflow_dispatch: {} # permette di far partire il workflow manualmente da GitHub
 
 permissions:
