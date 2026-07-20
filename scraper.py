@@ -6,17 +6,13 @@ per la pubblicazione automatica su Facebook/Instagram.
 Come funziona:
 1. Scarica le pagine di elenco annunci del sito pubblico.
 2. Per ogni annuncio trovato, apre la pagina di dettaglio e legge i meta tag
-   (Open Graph, standard SEO, o dati strutturati JSON-LD) per estrarre
-   titolo, descrizione e immagine, con vari livelli di fallback.
-3. Estrae i dati tecnici reali e chiede a Claude di scrivere solo la parte
-   narrativa "DESCRIZIONE".
-4. Inserisce la foto dell'immobile nel template brandizzato dell'agenzia.
-5. Mantiene uno stato persistente (data/state.json) con la data di "prima
-   vista" di ogni annuncio.
-6. Ogni ~N giorni (N = numero di annunci attivi, per un ritmo di 1/giorno),
-   "rinfresca" tutti gli annunci ancora attivi così Postpikr li ripubblica
-   da capo (vedi maybe_reset_cycle).
-7. Scrive il feed finale in docs/rss.xml (servito poi da GitHub Pages).
+   Open Graph (og:title, og:description, og:image) che il sito già espone
+   per le anteprime social -> è la fonte più stabile possibile, perché non
+   dipende dalla struttura grafica interna della pagina.
+3. Mantiene uno stato persistente (data/state.json) con la data di "prima
+   vista" di ogni annuncio, così il feed RSS ha date stabili nel tempo e
+   Postpikr non ripubblica lo stesso annuncio più volte.
+4. Scrive il feed finale in docs/rss.xml (servito poi da GitHub Pages).
 """
 
 import json
@@ -36,6 +32,8 @@ from PIL import Image
 
 BASE_URL = "https://www.immobiliaremalfatti.it/"
 
+# URL pubblico dove GitHub Pages pubblica questo repository (docs/).
+# Va aggiornato se cambi nome utente/repository.
 PAGES_BASE_URL = "https://marketingimmobiliaremalfatti-max.github.io/malfattirss/"
 
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
@@ -45,43 +43,63 @@ AGENCY_NAME = "Immobiliare Malfatti"
 
 TEMPLATE_PATH = Path(__file__).parent / "assets" / "template_vendita.png"
 IMAGES_DIR = Path(__file__).parent / "docs" / "images"
+# Area (sinistra, alto, destra, basso) del riquadro trasparente nel template
+# dove va inserita la foto dell'immobile, in pixel sul canvas 1080x1080.
 PHOTO_AREA = (0, 222, 1080, 1080)
 
+# Categorie di annunci da includere. I codici tipoOfferta sono quelli usati
+# dal motore di ricerca del sito (Real Software / Realsmart). Se il sito
+# aggiunge altre categorie, basta aggiungere altre voci qui.
+# NB: "n" = risultati per pagina, "p" = numero di pagina (parte da 1).
 RESULTS_PER_PAGE = 20
 LIST_URLS = [
-    f"elenco.aspx?tipoOfferta=33&prezzo=0&ric_libera=&n={RESULTS_PER_PAGE}&ord=0&contratto=0&comune=0",
+    f"elenco.aspx?tipoOfferta=33&prezzo=0&ric_libera=&n={RESULTS_PER_PAGE}&ord=0&contratto=0&comune=0",  # vendita
 ]
 
+# Parole chiave (cercate nello slug dell'URL) che identificano tipi di
+# immobile da escludere dal feed: negozi, terreni, garage/box, affitti.
 EXCLUDE_KEYWORDS = ("negozio", "affitto", "affitasi", "terreno", "garage", "box")
 
 STATE_FILE = Path(__file__).parent / "data" / "state.json"
 FUNNELS_FILE = Path(__file__).parent / "data" / "funnels.json"
-CYCLE_FILE = Path(__file__).parent / "data" / "cycle.json"
+ROTATION_FILE = Path(__file__).parent / "data" / "rotation.json"
 OUTPUT_FILE = Path(__file__).parent / "docs" / "rss.xml"
-MAX_ITEMS_IN_FEED = 60
+MAX_ITEMS_IN_FEED = 60  # numero massimo di annunci mantenuti nel feed
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; MalfattiRSSBot/1.0; +https://www.immobiliaremalfatti.it/)"
 }
 
+# Pattern che identifica gli URL delle pagine di dettaglio annuncio,
+# es: "Villa-in-vendita-roma-Rieti-T521.aspx"
 DETAIL_URL_PATTERN = re.compile(r"[A-Za-z0-9\-]+-T\d+\.aspx$")
 
 
 def is_excluded_listing(url):
+    """Restituisce True se l'annuncio va escluso in base al tipo (negozio,
+    terreno, garage/box, affitto), individuato dalle parole chiave nello slug."""
     slug = url.lower()
     return any(keyword in slug for keyword in EXCLUDE_KEYWORDS)
 
 
 def title_from_slug(url):
+    """Costruisce un titolo leggibile a partire dallo slug dell'URL, es:
+    'Attico---Mansarda-in-vendita-roma-Cittaducale-T345.aspx'
+    -> 'Attico / Mansarda in vendita Cittaducale'
+    Serve perché il tag og:title del sito è generico (nome agenzia) e non
+    specifico per annuncio.
+    """
     slug = url.rstrip("/").split("/")[-1]
     slug = re.sub(r"\.aspx$", "", slug, flags=re.IGNORECASE)
-    slug = re.sub(r"-{2,}", " / ", slug)
+    slug = re.sub(r"-{2,}", " / ", slug)  # doppi/tripli trattini -> slash (es. Attico/Mansarda)
     slug = slug.replace("-", " ")
     tokens = [t for t in slug.split(" ") if t]
 
+    # Rimuove il riferimento numerico finale (es. T345)
     if tokens and re.match(r"^T\d+$", tokens[-1], flags=re.IGNORECASE):
         tokens.pop()
 
+    # Rimuove il token "roma" (placeholder fisso del sito, non è la località reale)
     tokens = [t for t in tokens if t.lower() != "roma"]
 
     if not tokens:
@@ -104,6 +122,7 @@ def fetch(url, retries=3, pause=2):
 
 
 def discover_listing_urls():
+    """Scansiona le pagine di elenco e restituisce l'insieme di URL di dettaglio trovati."""
     urls = set()
     for list_url in LIST_URLS:
         full_url = urljoin(BASE_URL, list_url)
@@ -138,10 +157,14 @@ def discover_listing_urls():
                 f"{len(new_urls)} validi nuovi"
             )
 
+            # Si ferma quando la pagina non ha annunci, o ne ha meno del numero
+            # massimo per pagina (ultima pagina) -- il conteggio "grezzo", non
+            # quello filtrato, per non fermarsi prima solo perché una pagina
+            # piena aveva molti annunci esclusi.
             if raw_count == 0 or raw_count < RESULTS_PER_PAGE:
                 break
             page += 1
-            if page > 30:
+            if page > 30:  # limite di sicurezza anti-loop infinito
                 break
 
     return sorted(urls)
@@ -153,6 +176,7 @@ def extract_meta(soup, prop):
 
 
 def extract_jsonld(soup):
+    """Restituisce il primo oggetto JSON-LD trovato nella pagina, se presente."""
     for script in soup.find_all("script", type="application/ld+json"):
         if not script.string:
             continue
@@ -178,6 +202,9 @@ def extract_description(soup, jsonld):
     if jsonld and jsonld.get("description"):
         return jsonld["description"]
 
+    # Ultimo fallback: nessun meta-tag disponibile -> cerca nel testo visibile
+    # della pagina il blocco più lungo e verosimilmente descrittivo,
+    # escludendo footer/cookie/copyright e testi troppo corti.
     BLOCKLIST = (
         "cookie", "privacy", "copyright", "tutti i diritti",
         "p.iva", "partita iva", "iscriviti alla newsletter",
@@ -185,6 +212,8 @@ def extract_description(soup, jsonld):
     candidates = []
     for tag_name in ("p", "div", "span"):
         for el in soup.find_all(tag_name):
+            # Salta i contenitori che hanno figli con lo stesso tag (evita di
+            # prendere blocchi troppo grandi che includono l'intera pagina)
             if el.find(tag_name):
                 continue
             text = el.get_text(" ", strip=True)
@@ -215,6 +244,7 @@ def extract_image(soup, jsonld, page_url):
         if img:
             return urljoin(page_url, img)
 
+    # Fallback: prima immagine "vera" nella pagina (esclude loghi/icone)
     for img in soup.find_all("img", src=True):
         src = img["src"]
         if any(x in src.lower() for x in ("logo", "icon", "favicon", "sprite")):
@@ -225,6 +255,8 @@ def extract_image(soup, jsonld, page_url):
 
 
 def parse_technical_fields(raw_description):
+    """Estrae i campi tecnici (Prezzo, Metratura, Camere, Bagni, ecc.) dalla
+    descrizione grezza tipo 'Prezzo: € 239.000 Metratura: 290 mq Camere: 4 ...'"""
     labels = [
         "Stato interno", "Classe energetica", "Spese condominiali",
         "Metratura", "Riscaldamento", "Terrazzo", "Balconi", "Ascensore",
@@ -245,6 +277,9 @@ def parse_technical_fields(raw_description):
 
 
 def generate_narrative(title, raw_description, url):
+    """Chiede a Claude di scrivere solo la sezione narrativa 'DESCRIZIONE',
+    nello stile di un annuncio immobiliare caldo e professionale. Restituisce
+    None se manca la API key o la chiamata fallisce."""
     if not ANTHROPIC_API_KEY or not raw_description:
         return None
 
@@ -311,12 +346,16 @@ Dati tecnici disponibili: {raw_description}"""
 
 
 def build_full_caption(title, fields, narrative, funnel_url):
-    lines = [title]
+    """Assembla il post finale: eventuale CTA al funnel (solo se disponibile
+    per questo annuncio), caratteristiche principali (dati reali),
+    descrizione narrativa, nome agenzia. Il titolo NON viene ripetuto qui:
+    Postpikr lo mostra già separatamente dal campo <title> del feed."""
+    lines = []
 
     if funnel_url:
-        lines += ["", "Scopri subito le foto e il virtual tour:", funnel_url]
+        lines += ["Scopri subito le foto e il virtual tour:", funnel_url, ""]
 
-    lines += ["", "CARATTERISTICHE PRINCIPALI:"]
+    lines += ["CARATTERISTICHE PRINCIPALI:"]
 
     if fields.get("Prezzo"):
         lines.append(f"Prezzo: {fields['Prezzo']}")
@@ -336,12 +375,18 @@ def build_full_caption(title, fields, narrative, funnel_url):
 
 
 def compose_branded_image(photo_url, listing_id):
+    """Scarica la foto dell'annuncio e la inserisce nel template brandizzato
+    (fascia rossa in alto, foto nell'area sottostante). Restituisce l'URL
+    pubblico dell'immagine composta, o None se qualcosa va storto (in tal
+    caso il feed userà comunque la foto originale)."""
     if not photo_url:
         return None
 
     out_filename = f"{listing_id}.jpg"
     out_path = IMAGES_DIR / out_filename
 
+    # Se l'abbiamo già generata in un run precedente, la riusiamo senza
+    # riscaricare/ricomporre nulla.
     if out_path.exists():
         return urljoin(PAGES_BASE_URL, f"images/{out_filename}")
 
@@ -363,6 +408,8 @@ def compose_branded_image(photo_url, listing_id):
     area_w = area_right - area_left
     area_h = area_bottom - area_top
 
+    # Ridimensiona la foto per riempire l'area mantenendo le proporzioni
+    # (crop centrato, tipo "object-fit: cover" del CSS).
     photo_ratio = photo.width / photo.height
     area_ratio = area_w / area_h
     if photo_ratio > area_ratio:
@@ -388,6 +435,7 @@ def compose_branded_image(photo_url, listing_id):
 
 
 def scrape_listing(url):
+    """Estrae i dati di un singolo annuncio dalla sua pagina di dettaglio."""
     html = fetch(url)
     if not html:
         return None
@@ -403,6 +451,7 @@ def scrape_listing(url):
     image = extract_image(soup, jsonld, url)
     canonical = extract_meta(soup, "og:url") or url
 
+    # Estrae un identificativo stabile dall'URL, es: T521
     m = re.search(r"-T(\d+)\.aspx", url)
     listing_id = m.group(1) if m else url
 
@@ -415,58 +464,57 @@ def scrape_listing(url):
     }
 
 
-def load_cycle_state():
-    if CYCLE_FILE.exists():
+def load_rotation():
+    if ROTATION_FILE.exists():
         try:
-            return json.loads(CYCLE_FILE.read_text(encoding="utf-8"))
+            return json.loads(ROTATION_FILE.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
             pass
-    return {}
+    return {"order": [], "pointer": -1, "last_advanced_date": None}
 
 
-def save_cycle_state(cycle_state):
-    CYCLE_FILE.parent.mkdir(parents=True, exist_ok=True)
-    CYCLE_FILE.write_text(json.dumps(cycle_state, ensure_ascii=False, indent=2), encoding="utf-8")
+def save_rotation(rotation):
+    ROTATION_FILE.parent.mkdir(parents=True, exist_ok=True)
+    ROTATION_FILE.write_text(json.dumps(rotation, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
-def maybe_reset_cycle(state, active_count):
-    """Se il ciclo corrente (~1 annuncio al giorno) è terminato, 'rinfresca'
-    tutti gli annunci ancora attivi: nuova data di pubblicazione e nuovo
-    numero di ciclo (usato per generare un guid diverso), così Postpikr li
-    tratta come contenuto nuovo da ripubblicare, pur linkando sempre
-    all'annuncio corretto. Restituisce (cycle_number, now_iso)."""
-    cycle_state = load_cycle_state()
-    now = datetime.now(timezone.utc)
-    now_iso = now.isoformat()
+def advance_daily_rotation(state, active_ids):
+    """Postpikr salta la pubblicazione se il feed non ha 'contenuti nuovi'
+    rispetto all'ultima volta -- non tiene una coda propria da svuotare nel
+    tempo. Per garantire che ci sia sempre qualcosa di nuovo da pubblicare
+    ogni giorno (anche quando il sito non ha aggiunto annunci), ogni
+    giorno di calendario scegliamo UN annuncio tra quelli già attivi e gli
+    assegniamo una data di pubblicazione e un guid nuovi (vedi
+    'refresh_count' in state). Si ruota nell'ordine tra tutti gli annunci
+    attivi, ricominciando da capo una volta arrivati in fondo alla lista.
+    Gli annunci scoperti per la prima volta oggi sono già "nuovi" di per
+    sé (nuovo guid), quindi non hanno bisogno di aspettare il loro turno.
+    """
+    rotation = load_rotation()
+    order = [lid for lid in rotation.get("order", []) if lid in active_ids]
+    for lid in sorted(active_ids):
+        if lid not in order:
+            order.append(lid)
 
-    cycle_number = cycle_state.get("cycle_number", 1)
-    cycle_started_at = cycle_state.get("cycle_started_at")
-    cycle_length_days = cycle_state.get("cycle_length_days")
+    today = datetime.now(timezone.utc).date().isoformat()
 
-    if not cycle_started_at or not cycle_length_days:
-        cycle_started_at = now_iso
-        cycle_length_days = max(active_count, 1)
+    if not order:
+        save_rotation({"order": order, "pointer": -1, "last_advanced_date": today})
+        return
+
+    if rotation.get("last_advanced_date") != today:
+        pointer = (rotation.get("pointer", -1) + 1) % len(order)
+        chosen_id = order[pointer]
+        now_iso = datetime.now(timezone.utc).isoformat()
+        entry = state.setdefault(chosen_id, {})
+        entry["last_published_at"] = now_iso
+        entry["refresh_count"] = entry.get("refresh_count", 0) + 1
+        print(f"  [ROTAZIONE] Oggi tocca a: {entry.get('title', chosen_id)}")
+        rotation = {"order": order, "pointer": pointer, "last_advanced_date": today}
     else:
-        started = datetime.fromisoformat(cycle_started_at)
-        days_elapsed = (now - started).days
-        if days_elapsed >= cycle_length_days:
-            print(
-                f"  [CICLO] {cycle_length_days} giorni trascorsi: "
-                f"si ricomincia (ciclo {cycle_number} -> {cycle_number + 1})"
-            )
-            cycle_number += 1
-            cycle_started_at = now_iso
-            cycle_length_days = max(active_count, 1)
-            for entry in state.values():
-                entry["first_seen"] = now_iso
+        rotation["order"] = order
 
-    save_cycle_state({
-        "cycle_number": cycle_number,
-        "cycle_started_at": cycle_started_at,
-        "cycle_length_days": cycle_length_days,
-    })
-
-    return cycle_number, now_iso
+    save_rotation(rotation)
 
 
 def load_state():
@@ -481,6 +529,10 @@ def save_state(state):
 
 
 def load_funnels():
+    """Carica la mappatura URL annuncio -> URL funnel da data/funnels.json.
+    Chiave = URL completo della pagina annuncio (stabile anche se il codice
+    tipo T521 verrà riassegnato in futuro a un altro immobile), valore =
+    URL del funnel. Annunci non presenti nel file non avranno il CTA."""
     if FUNNELS_FILE.exists():
         try:
             return json.loads(FUNNELS_FILE.read_text(encoding="utf-8"))
@@ -489,24 +541,29 @@ def load_funnels():
     return {}
 
 
-def build_feed(listings_with_dates, cycle_number):
+def build_feed(listings_with_dates):
     fg = FeedGenerator()
-    fg.load_extension("media")
+    fg.load_extension("media")  # per media:content, alcuni lettori RSS lo preferiscono all'enclosure
     fg.title("Immobiliare Malfatti - Annunci")
     fg.link(href=BASE_URL, rel="alternate")
     fg.description("Feed automatico degli annunci pubblicati su immobiliaremalfatti.it")
     fg.language("it")
 
-    listings_with_dates.sort(key=lambda x: x["first_seen"], reverse=True)
+    # Ordina dal più recente al più vecchio (in base all'ultima pubblicazione/rotazione)
+    listings_with_dates.sort(key=lambda x: x["last_published_at"], reverse=True)
 
     for item in listings_with_dates[:MAX_ITEMS_IN_FEED]:
         fe = fg.add_entry()
         fe.id(item["url"])
         fe.title(item["title"])
         fe.link(href=item["url"])
-        fe.guid(f"{item['url']}#c{cycle_number}", permalink=False)
+        # Il guid include il numero di "refresh" (NON è l'URL vero, quindi
+        # isPermaLink="false"): cambia solo per l'annuncio scelto dalla
+        # rotazione giornaliera, così Postpikr lo tratta come contenuto
+        # nuovo, mentre il link sopra continua a puntare al vero annuncio.
+        fe.guid(f"{item['url']}#r{item['refresh_count']}", permalink=False)
 
-        pub_date = datetime.fromisoformat(item["first_seen"])
+        pub_date = datetime.fromisoformat(item["last_published_at"])
         if pub_date.tzinfo is None:
             pub_date = pub_date.replace(tzinfo=timezone.utc)
         fe.pubDate(pub_date)
@@ -546,6 +603,11 @@ def main():
         if not data:
             continue
 
+        # Controllo di sicurezza aggiuntivo: lo slug trovato nella pagina
+        # elenco e l'URL/titolo definitivo della pagina di dettaglio a volte
+        # differiscono (es. il sito usa testi leggermente diversi per lo
+        # stesso annuncio). Ricontrolliamo qui con i dati più autorevoli,
+        # così un negozio/terreno/garage/affitto non sfugge al filtro.
         if is_excluded_listing(data["url"]) or is_excluded_listing(data["title"]):
             print(f"  [ESCLUSO] {data['title']} ({data['url']}) -- rilevato dopo lo scraping")
             continue
@@ -556,10 +618,18 @@ def main():
 
         if listing_id in state:
             first_seen = previous["first_seen"]
+            last_published_at = previous.get("last_published_at", first_seen)
+            refresh_count = previous.get("refresh_count", 0)
         else:
             first_seen = now_iso
+            last_published_at = now_iso
+            refresh_count = 0
             print(f"  [NUOVO] {data['title']} ({url})")
 
+        # Genera solo la parte narrativa una volta per annuncio (cache), poi
+        # la riusa nei run successivi (risparmia chiamate API e mantiene
+        # coerenza). Il resto del post (caratteristiche, contatti) viene
+        # sempre riassemblato con i dati più recenti.
         narrative = previous.get("narrative")
         if not narrative:
             narrative = generate_narrative(data["title"], data["description"], data["url"])
@@ -575,6 +645,8 @@ def main():
 
         state[listing_id] = {
             "first_seen": first_seen,
+            "last_published_at": last_published_at,
+            "refresh_count": refresh_count,
             "url": data["url"],
             "title": data["title"],
             "narrative": narrative,
@@ -584,9 +656,12 @@ def main():
             **data,
             "image": image_for_feed,
             "first_seen": first_seen,
+            "last_published_at": last_published_at,
+            "refresh_count": refresh_count,
             "caption": caption,
         })
 
+    # Rimuove dallo stato gli annunci non più presenti sul sito (venduti/rimossi)
     removed = set(state.keys()) - seen_ids
     for rid in removed:
         print(f"  [RIMOSSO] {state[rid]['title']}")
@@ -594,13 +669,18 @@ def main():
 
     save_state(state)
 
-    cycle_number, _ = maybe_reset_cycle(state, active_count=len(listings_with_dates))
+    # Rotazione giornaliera: sceglie un annuncio (tra quelli già attivi) a
+    # cui assegnare oggi una data/guid nuovi, cosi Postpikr trova sempre
+    # qualcosa di "nuovo" da pubblicare -- risincronizziamo i listing
+    # appena costruiti con lo stato eventualmente aggiornato.
+    advance_daily_rotation(state, active_ids=seen_ids)
     for item in listings_with_dates:
-        item["first_seen"] = state[item["id"]]["first_seen"]
+        item["last_published_at"] = state[item["id"]]["last_published_at"]
+        item["refresh_count"] = state[item["id"]]["refresh_count"]
     save_state(state)
 
     print("== Generazione feed RSS ==")
-    build_feed(listings_with_dates, cycle_number)
+    build_feed(listings_with_dates)
     print(f"Feed scritto in: {OUTPUT_FILE}")
 
 
