@@ -2,8 +2,11 @@ name: Aggiorna feed RSS Immobiliare Malfatti
 
 on:
   schedule:
-    # Ogni 4 ore. Modifica il cron se vuoi una frequenza diversa.
-    - cron: "0 6 * * 1"
+    # Ogni giorno alle 6:00 UTC (7:00 ora italiana in inverno, 8:00 in estate).
+    # Necessario che giri OGNI GIORNO: la rotazione giornaliera (che garantisce
+    # sempre un contenuto "nuovo" per Postpikr) avanza di uno step per ogni
+    # giorno di calendario in cui lo script viene eseguito.
+    - cron: "0 6 * * *"
   workflow_dispatch: {} # permette di far partire il workflow manualmente da GitHub
 
 permissions:
@@ -33,6 +36,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/rss.xml docs/images/ data/state.json
+          git add docs/rss.xml docs/images/ data/state.json data/rotation.json
           git diff --staged --quiet || git commit -m "Aggiorna feed RSS annunci [automatico]"
           git push
