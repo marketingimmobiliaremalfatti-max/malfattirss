@@ -2,11 +2,11 @@ name: Aggiorna feed RSS Immobiliare Malfatti
 
 on:
   schedule:
-    # Ogni giorno alle 6:00 UTC (7:00 ora italiana in inverno, 8:00 in estate).
+    # Ogni giorno alle 8:00 UTC (10:00 ora italiana in estate, 9:00 in inverno).
     # Necessario che giri OGNI GIORNO: la rotazione giornaliera (che garantisce
     # sempre un contenuto "nuovo" per Postpikr) avanza di uno step per ogni
     # giorno di calendario in cui lo script viene eseguito.
-    - cron: "0 6 * * *"
+    - cron: "0 8 * * *"
   workflow_dispatch: {} # permette di far partire il workflow manualmente da GitHub
 
 permissions:
