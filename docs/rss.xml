@@ -7,7 +7,7 @@
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
     <language>it</language>
-    <lastBuildDate>Mon, 20 Jul 2026 09:43:17 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 Jul 2026 10:28:19 +0000</lastBuildDate>
     <item>
       <title>Villa in vendita Varco Sabino</title>
       <link>https://www.immobiliaremalfatti.it/Villa-in-vendita-roma-Varco-Sabino-T517.aspx</link>
@@ -739,29 +739,6 @@ Immobiliare Malfatti</description>
       <pubDate>Mon, 13 Jul 2026 10:52:25 +0000</pubDate>
     </item>
     <item>
-      <title>Appartamento in vendita Rieti</title>
-      <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T201.aspx</link>
-      <description>&lt;img src="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/201.jpg" /&gt;&lt;br/&gt;CARATTERISTICHE PRINCIPALI:&lt;br/&gt;
-Prezzo: € 48.000&lt;br/&gt;
-Superficie: 55 mq&lt;br/&gt;
-Camere: 1&lt;br/&gt;
-Bagni: 1&lt;br/&gt;
-&lt;br/&gt;
-DESCRIZIONE:&lt;br/&gt;
-Nel centro di Rieti, proponiamo in vendita un appartamento al piano rialzato di una palazzina su tre livelli, per una superficie complessiva di 55 mq.&lt;br/&gt;
-&lt;br/&gt;
-La soluzione si compone di una camera da letto, un cucinotto, un bagno e un balcone, completando una distribuzione essenziale e funzionale, adatta a una persona singola o a una coppia. L'immobile è dotato di riscaldamento autonomo, un vantaggio concreto in termini di gestione delle spese. Lo stato interno è buono/discreto, il che rende la proprietà abitabile nell'immediato, pur lasciando spazio a eventuali personalizzazioni.&lt;br/&gt;
-&lt;br/&gt;
-Un'opportunità interessante per chi cerca una prima casa nel tessuto urbano di Rieti, o un investimento da mettere a reddito, a un prezzo particolarmente competitivo.&lt;br/&gt;
-&lt;br/&gt;
-Per maggiori informazioni o per fissare una visita, non esitare a contattarci. Saremo felici di accompagnarti nella scoperta di questa proprietà.&lt;br/&gt;
-&lt;br/&gt;
-Immobiliare Malfatti</description>
-      <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T201.aspx#r0</guid>
-      <enclosure url="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/201.jpg" length="0" type="image/jpeg"/>
-      <pubDate>Mon, 13 Jul 2026 10:52:25 +0000</pubDate>
-    </item>
-    <item>
       <title>Appartamento in vendita Greccio</title>
       <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Greccio-T604.aspx</link>
       <description>&lt;img src="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/604.jpg" /&gt;&lt;br/&gt;CARATTERISTICHE PRINCIPALI:&lt;br/&gt;
@@ -933,6 +910,29 @@ Immobiliare Malfatti</description>
       <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Micigliano-T104.aspx#r1</guid>
       <enclosure url="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/104.jpg" length="0" type="image/jpeg"/>
       <pubDate>Mon, 20 Jul 2026 09:43:17 +0000</pubDate>
+    </item>
+    <item>
+      <title>Appartamento in vendita Rieti</title>
+      <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T201.aspx</link>
+      <description>&lt;img src="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/201.jpg" /&gt;&lt;br/&gt;CARATTERISTICHE PRINCIPALI:&lt;br/&gt;
+Prezzo: € 48.000&lt;br/&gt;
+Superficie: 55 mq&lt;br/&gt;
+Camere: 1&lt;br/&gt;
+Bagni: 1&lt;br/&gt;
+&lt;br/&gt;
+DESCRIZIONE:&lt;br/&gt;
+Nel centro di Rieti, proponiamo in vendita un appartamento al piano rialzato di una palazzina su tre livelli, per una superficie complessiva di 55 mq.&lt;br/&gt;
+&lt;br/&gt;
+La soluzione si compone di una camera da letto, un cucinotto, un bagno e un balcone, completando una distribuzione essenziale e funzionale, adatta a una persona singola o a una coppia. L'immobile è dotato di riscaldamento autonomo, un vantaggio concreto in termini di gestione delle spese. Lo stato interno è buono/discreto, il che rende la proprietà abitabile nell'immediato, pur lasciando spazio a eventuali personalizzazioni.&lt;br/&gt;
+&lt;br/&gt;
+Un'opportunità interessante per chi cerca una prima casa nel tessuto urbano di Rieti, o un investimento da mettere a reddito, a un prezzo particolarmente competitivo.&lt;br/&gt;
+&lt;br/&gt;
+Per maggiori informazioni o per fissare una visita, non esitare a contattarci. Saremo felici di accompagnarti nella scoperta di questa proprietà.&lt;br/&gt;
+&lt;br/&gt;
+Immobiliare Malfatti</description>
+      <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T201.aspx#r1</guid>
+      <enclosure url="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/201.jpg" length="0" type="image/jpeg"/>
+      <pubDate>Wed, 22 Jul 2026 10:28:19 +0000</pubDate>
     </item>
   </channel>
 </rss>
