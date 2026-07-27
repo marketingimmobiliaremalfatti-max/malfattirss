@@ -7,7 +7,7 @@
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
     <language>it</language>
-    <lastBuildDate>Sun, 26 Jul 2026 10:03:44 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 27 Jul 2026 11:27:57 +0000</lastBuildDate>
     <item>
       <title>Villa in vendita Varco Sabino</title>
       <link>https://www.immobiliaremalfatti.it/Villa-in-vendita-roma-Varco-Sabino-T517.aspx</link>
@@ -645,29 +645,6 @@ Immobiliare Malfatti</description>
       <pubDate>Mon, 13 Jul 2026 10:52:25 +0000</pubDate>
     </item>
     <item>
-      <title>Appartamento in vendita Rieti</title>
-      <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T305.aspx</link>
-      <description>&lt;img src="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/305.jpg" /&gt;&lt;br/&gt;CARATTERISTICHE PRINCIPALI:&lt;br/&gt;
-Prezzo: € 149.000&lt;br/&gt;
-Superficie: 80 mq&lt;br/&gt;
-Camere: 2&lt;br/&gt;
-Bagni: 1&lt;br/&gt;
-&lt;br/&gt;
-DESCRIZIONE:&lt;br/&gt;
-Proponiamo in vendita un appartamento situato al primo e secondo piano di un edificio di due livelli, nel comune di Rieti. Con una superficie di 80 mq, la soluzione si sviluppa su due piani interni e si presenta in stato nuovo o in fase di costruzione, offrendo quindi la possibilità di entrare in un contesto abitativo fresco e curato.&lt;br/&gt;
-&lt;br/&gt;
-La distribuzione interna prevede due camere da letto, una cucina semi-abitabile e un bagno. Il riscaldamento è autonomo, garantendo la massima gestione dei consumi energetici in totale indipendenza dagli altri condomini.&lt;br/&gt;
-&lt;br/&gt;
-Un'opportunità interessante per chi cerca una prima casa o un investimento nel territorio reatino, a un prezzo competitivo di 149.000 €.&lt;br/&gt;
-&lt;br/&gt;
-Per maggiori informazioni o per fissare una visita, non esitare a contattarci. Saremo felici di accompagnarti nella scoperta di questa proprietà.&lt;br/&gt;
-&lt;br/&gt;
-Immobiliare Malfatti</description>
-      <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T305.aspx#r0</guid>
-      <enclosure url="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/305.jpg" length="0" type="image/jpeg"/>
-      <pubDate>Mon, 13 Jul 2026 10:52:25 +0000</pubDate>
-    </item>
-    <item>
       <title>Appartamento in vendita Contigliano</title>
       <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Contigliano-T516.aspx</link>
       <description>&lt;img src="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/516.jpg" /&gt;&lt;br/&gt;CARATTERISTICHE PRINCIPALI:&lt;br/&gt;
@@ -981,6 +958,29 @@ Immobiliare Malfatti</description>
       <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Cittaducale-T215.aspx#r1</guid>
       <enclosure url="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/215.jpg" length="0" type="image/jpeg"/>
       <pubDate>Sun, 26 Jul 2026 10:03:44 +0000</pubDate>
+    </item>
+    <item>
+      <title>Appartamento in vendita Rieti</title>
+      <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T305.aspx</link>
+      <description>&lt;img src="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/305.jpg" /&gt;&lt;br/&gt;CARATTERISTICHE PRINCIPALI:&lt;br/&gt;
+Prezzo: € 149.000&lt;br/&gt;
+Superficie: 80 mq&lt;br/&gt;
+Camere: 2&lt;br/&gt;
+Bagni: 1&lt;br/&gt;
+&lt;br/&gt;
+DESCRIZIONE:&lt;br/&gt;
+Proponiamo in vendita un appartamento situato al primo e secondo piano di un edificio di due livelli, nel comune di Rieti. Con una superficie di 80 mq, la soluzione si sviluppa su due piani interni e si presenta in stato nuovo o in fase di costruzione, offrendo quindi la possibilità di entrare in un contesto abitativo fresco e curato.&lt;br/&gt;
+&lt;br/&gt;
+La distribuzione interna prevede due camere da letto, una cucina semi-abitabile e un bagno. Il riscaldamento è autonomo, garantendo la massima gestione dei consumi energetici in totale indipendenza dagli altri condomini.&lt;br/&gt;
+&lt;br/&gt;
+Un'opportunità interessante per chi cerca una prima casa o un investimento nel territorio reatino, a un prezzo competitivo di 149.000 €.&lt;br/&gt;
+&lt;br/&gt;
+Per maggiori informazioni o per fissare una visita, non esitare a contattarci. Saremo felici di accompagnarti nella scoperta di questa proprietà.&lt;br/&gt;
+&lt;br/&gt;
+Immobiliare Malfatti</description>
+      <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T305.aspx#r1</guid>
+      <enclosure url="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/305.jpg" length="0" type="image/jpeg"/>
+      <pubDate>Mon, 27 Jul 2026 11:27:57 +0000</pubDate>
     </item>
   </channel>
 </rss>
