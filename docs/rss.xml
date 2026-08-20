@@ -7,7 +7,7 @@
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
     <language>it</language>
-    <lastBuildDate>Wed, 19 Aug 2026 08:40:29 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 20 Aug 2026 08:41:52 +0000</lastBuildDate>
     <item>
       <title>Villa in vendita Torricella in Sabina</title>
       <link>https://www.immobiliaremalfatti.it/Villa-in-vendita-roma-Torricella-in-Sabina-T801.aspx</link>
@@ -203,29 +203,6 @@ Immobiliare Malfatti</description>
       <pubDate>Fri, 24 Jul 2026 10:22:20 +0000</pubDate>
     </item>
     <item>
-      <title>Villa in vendita Rieti</title>
-      <link>https://www.immobiliaremalfatti.it/Villa-in-vendita-roma-Rieti-T429.aspx</link>
-      <description>&lt;img src="https://www.immobiliaremalfatti.it/portali/foto/344/344-3018478.jpg" /&gt;&lt;br/&gt;CARATTERISTICHE PRINCIPALI:&lt;br/&gt;
-Prezzo: € 209.000&lt;br/&gt;
-Superficie: 100 mq&lt;br/&gt;
-Camere: 3&lt;br/&gt;
-Bagni: 2&lt;br/&gt;
-&lt;br/&gt;
-DESCRIZIONE:&lt;br/&gt;
-Proponiamo in vendita una piacevole villa situata a Rieti, sviluppata su due livelli abitativi per una superficie complessiva di 100 mq. Lo stato interno è ottimo, rendendola pronta all'uso senza necessità di interventi immediati.&lt;br/&gt;
-&lt;br/&gt;
-La distribuzione interna offre tre camere da letto, due bagni e una cucina semi-abitabile, garantendo spazi confortevoli e funzionali per una famiglia. Il riscaldamento autonomo assicura piena autonomia nella gestione dei consumi energetici.&lt;br/&gt;
-&lt;br/&gt;
-Una soluzione ideale per chi cerca una prima casa o una residenza nel territorio reatino, disponibile a un prezzo di € 209.000.&lt;br/&gt;
-&lt;br/&gt;
-Per maggiori informazioni o per fissare una visita, non esitare a contattarci. Saremo felici di accompagnarti nella scoperta di questa proprietà.&lt;br/&gt;
-&lt;br/&gt;
-Immobiliare Malfatti</description>
-      <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Villa-in-vendita-roma-Rieti-T429.aspx#r0</guid>
-      <enclosure url="https://www.immobiliaremalfatti.it/portali/foto/344/344-3018478.jpg" length="0" type="image/jpeg"/>
-      <pubDate>Sat, 25 Jul 2026 09:50:55 +0000</pubDate>
-    </item>
-    <item>
       <title>Appartamento in vendita Rieti</title>
       <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T211.aspx</link>
       <description>&lt;img src="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/211.jpg" /&gt;&lt;br/&gt;CARATTERISTICHE PRINCIPALI:&lt;br/&gt;
@@ -366,31 +343,6 @@ Immobiliare Malfatti</description>
       <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Villa-in-vendita-roma-Leonessa-T334.aspx#r0</guid>
       <enclosure url="https://www.immobiliaremalfatti.it/portali/foto/344/344-2968937.jpg" length="0" type="image/jpeg"/>
       <pubDate>Thu, 30 Jul 2026 10:27:11 +0000</pubDate>
-    </item>
-    <item>
-      <title>Appartamento in vendita Rieti</title>
-      <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T317.aspx</link>
-      <description>&lt;img src="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/317.jpg" /&gt;&lt;br/&gt;CARATTERISTICHE PRINCIPALI:&lt;br/&gt;
-Prezzo: € 138.000&lt;br/&gt;
-Superficie: 105 mq&lt;br/&gt;
-Camere: 2&lt;br/&gt;
-Bagni: 2&lt;br/&gt;
-&lt;br/&gt;
-DESCRIZIONE:&lt;br/&gt;
-Proponiamo in vendita un appartamento luminoso situato al secondo e ultimo piano di una palazzina nel comune di Rieti, per una superficie complessiva di 105 mq in ottimo stato interno.&lt;br/&gt;
-&lt;br/&gt;
-La soluzione si compone di due camere da letto, un angolo cottura, due bagni e un balcone, completati dalla presenza di un terrazzo che rappresenta un valore aggiunto importante: uno spazio all'aperto ideale per rilassarsi o per vivere i mesi più caldi in totale comfort. Il riscaldamento è autonomo, garanzia di piena gestione dei consumi energetici.&lt;br/&gt;
-&lt;br/&gt;
-A completare l'offerta, la proprietà include un box singolo, elemento pratico e apprezzato, soprattutto in contesto urbano.&lt;br/&gt;
-&lt;br/&gt;
-Un'opportunità interessante per chi cerca una prima casa ben tenuta o un investimento a Rieti, a un prezzo competitivo considerata la metratura e la dotazione complessiva dell'immobile.&lt;br/&gt;
-&lt;br/&gt;
-Per maggiori informazioni o per fissare una visita, non esitare a contattarci. Saremo felici di accompagnarti nella scoperta di questa proprietà.&lt;br/&gt;
-&lt;br/&gt;
-Immobiliare Malfatti</description>
-      <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T317.aspx#r1</guid>
-      <enclosure url="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/317.jpg" length="0" type="image/jpeg"/>
-      <pubDate>Thu, 30 Jul 2026 10:28:01 +0000</pubDate>
     </item>
     <item>
       <title>Villa in vendita Cittaducale</title>
@@ -857,6 +809,51 @@ Immobiliare Malfatti</description>
       <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T434.aspx#r1</guid>
       <enclosure url="https://www.immobiliaremalfatti.it/portali/foto/344/344-3014657.jpg" length="0" type="image/jpeg"/>
       <pubDate>Wed, 19 Aug 2026 08:40:29 +0000</pubDate>
+    </item>
+    <item>
+      <title>Appartamento in vendita Rieti</title>
+      <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T301.aspx</link>
+      <description>&lt;img src="https://www.immobiliaremalfatti.it/portali/foto/344/344-3039010.jpg" /&gt;&lt;br/&gt;CARATTERISTICHE PRINCIPALI:&lt;br/&gt;
+Prezzo: € 113.000&lt;br/&gt;
+Superficie: 82 mq&lt;br/&gt;
+Camere: 2&lt;br/&gt;
+&lt;br/&gt;
+DESCRIZIONE:&lt;br/&gt;
+Nel cuore di Rieti, proponiamo in vendita un appartamento ristrutturato di 82 mq, situato al secondo e ultimo piano di una palazzina d'epoca del 1955. La posizione elevata regala luminosità e riservatezza, rendendo l'abitazione una soluzione piacevole e funzionale.&lt;br/&gt;
+&lt;br/&gt;
+Gli interni, oggetto di interventi di ristrutturazione, si presentano in buone condizioni e ospitano due camere da letto, garantendo una distribuzione degli spazi adatta a una coppia o a una piccola famiglia. Il riscaldamento autonomo assicura il pieno controllo dei consumi energetici.&lt;br/&gt;
+&lt;br/&gt;
+Un gradevole terrazzo completa la proprietà, offrendo uno spazio esterno privato dove godersi momenti di relax all'aria aperta. A completare l'offerta è disponibile anche un posto auto scoperto, comodo vantaggio nella quotidianità cittadina.&lt;br/&gt;
+&lt;br/&gt;
+Un'opportunità concreta per chi cerca una prima casa o un investimento nel centro di Rieti, a un prezzo competitivo. Per maggiori informazioni o per fissare una visita, non esitare a contattarci: saremo felici di accompagnarti nella scoperta di questa proprietà.&lt;br/&gt;
+&lt;br/&gt;
+Immobiliare Malfatti</description>
+      <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T301.aspx#r0</guid>
+      <enclosure url="https://www.immobiliaremalfatti.it/portali/foto/344/344-3039010.jpg" length="0" type="image/jpeg"/>
+      <pubDate>Thu, 20 Aug 2026 08:41:01 +0000</pubDate>
+    </item>
+    <item>
+      <title>Villa in vendita Rieti</title>
+      <link>https://www.immobiliaremalfatti.it/Villa-in-vendita-roma-Rieti-T429.aspx</link>
+      <description>&lt;img src="https://www.immobiliaremalfatti.it/portali/foto/344/344-3018478.jpg" /&gt;&lt;br/&gt;CARATTERISTICHE PRINCIPALI:&lt;br/&gt;
+Prezzo: € 209.000&lt;br/&gt;
+Superficie: 100 mq&lt;br/&gt;
+Camere: 3&lt;br/&gt;
+Bagni: 2&lt;br/&gt;
+&lt;br/&gt;
+DESCRIZIONE:&lt;br/&gt;
+Proponiamo in vendita una piacevole villa situata a Rieti, sviluppata su due livelli abitativi per una superficie complessiva di 100 mq. Lo stato interno è ottimo, rendendola pronta all'uso senza necessità di interventi immediati.&lt;br/&gt;
+&lt;br/&gt;
+La distribuzione interna offre tre camere da letto, due bagni e una cucina semi-abitabile, garantendo spazi confortevoli e funzionali per una famiglia. Il riscaldamento autonomo assicura piena autonomia nella gestione dei consumi energetici.&lt;br/&gt;
+&lt;br/&gt;
+Una soluzione ideale per chi cerca una prima casa o una residenza nel territorio reatino, disponibile a un prezzo di € 209.000.&lt;br/&gt;
+&lt;br/&gt;
+Per maggiori informazioni o per fissare una visita, non esitare a contattarci. Saremo felici di accompagnarti nella scoperta di questa proprietà.&lt;br/&gt;
+&lt;br/&gt;
+Immobiliare Malfatti</description>
+      <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Villa-in-vendita-roma-Rieti-T429.aspx#r1</guid>
+      <enclosure url="https://www.immobiliaremalfatti.it/portali/foto/344/344-3018478.jpg" length="0" type="image/jpeg"/>
+      <pubDate>Thu, 20 Aug 2026 08:41:52 +0000</pubDate>
     </item>
   </channel>
 </rss>
