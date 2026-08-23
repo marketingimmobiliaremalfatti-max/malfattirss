@@ -7,7 +7,7 @@
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
     <language>it</language>
-    <lastBuildDate>Sat, 22 Aug 2026 08:33:27 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 23 Aug 2026 08:33:23 +0000</lastBuildDate>
     <item>
       <title>Villa in vendita Torricella in Sabina</title>
       <link>https://www.immobiliaremalfatti.it/Villa-in-vendita-roma-Torricella-in-Sabina-T801.aspx</link>
@@ -392,29 +392,6 @@ Immobiliare Malfatti</description>
       <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T328.aspx#r1</guid>
       <enclosure url="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/328.jpg" length="0" type="image/jpeg"/>
       <pubDate>Sun, 02 Aug 2026 10:00:28 +0000</pubDate>
-    </item>
-    <item>
-      <title>Appartamento in vendita Rieti</title>
-      <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T523.aspx</link>
-      <description>&lt;img src="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/523.jpg" /&gt;&lt;br/&gt;CARATTERISTICHE PRINCIPALI:&lt;br/&gt;
-Prezzo: € 55.000&lt;br/&gt;
-Superficie: 125 mq&lt;br/&gt;
-Camere: 4&lt;br/&gt;
-Bagni: 2&lt;br/&gt;
-&lt;br/&gt;
-DESCRIZIONE:&lt;br/&gt;
-Proponiamo in vendita un ampio appartamento situato a Rieti, sviluppato su due livelli all'interno di un edificio di tre piani, per una superficie complessiva di 125 mq. L'immobile si presenta in ottime condizioni interne, pronto per essere abitato senza necessità di interventi immediati.&lt;br/&gt;
-&lt;br/&gt;
-La distribuzione degli spazi è generosa e funzionale: quattro camere da letto offrono ampie possibilità di utilizzo, affiancate da una cucina abitabile, due bagni e un balcone. Il riscaldamento autonomo garantisce la massima indipendenza nella gestione dei consumi.&lt;br/&gt;
-&lt;br/&gt;
-Un'opportunità interessante per chi cerca una soluzione spaziosa a Rieti, adatta tanto a una famiglia numerosa quanto a chi desidera un investimento immobiliare in città, a un prezzo decisamente competitivo per la metratura offerta.&lt;br/&gt;
-&lt;br/&gt;
-Per maggiori informazioni o per fissare una visita, non esitare a contattarci. Saremo felici di accompagnarti nella scoperta di questa proprietà.&lt;br/&gt;
-&lt;br/&gt;
-Immobiliare Malfatti</description>
-      <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T523.aspx#r0</guid>
-      <enclosure url="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/523.jpg" length="0" type="image/jpeg"/>
-      <pubDate>Tue, 04 Aug 2026 10:42:05 +0000</pubDate>
     </item>
     <item>
       <title>Appartamento in vendita Contigliano</title>
@@ -854,6 +831,29 @@ Immobiliare Malfatti</description>
       <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Villa-in-vendita-roma-Rieti-T518.aspx#r1</guid>
       <enclosure url="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/518.jpg" length="0" type="image/jpeg"/>
       <pubDate>Sat, 22 Aug 2026 08:33:27 +0000</pubDate>
+    </item>
+    <item>
+      <title>Appartamento in vendita Rieti</title>
+      <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T523.aspx</link>
+      <description>&lt;img src="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/523.jpg" /&gt;&lt;br/&gt;CARATTERISTICHE PRINCIPALI:&lt;br/&gt;
+Prezzo: € 55.000&lt;br/&gt;
+Superficie: 125 mq&lt;br/&gt;
+Camere: 4&lt;br/&gt;
+Bagni: 2&lt;br/&gt;
+&lt;br/&gt;
+DESCRIZIONE:&lt;br/&gt;
+Proponiamo in vendita un ampio appartamento situato a Rieti, sviluppato su due livelli all'interno di un edificio di tre piani, per una superficie complessiva di 125 mq. L'immobile si presenta in ottime condizioni interne, pronto per essere abitato senza necessità di interventi immediati.&lt;br/&gt;
+&lt;br/&gt;
+La distribuzione degli spazi è generosa e funzionale: quattro camere da letto offrono ampie possibilità di utilizzo, affiancate da una cucina abitabile, due bagni e un balcone. Il riscaldamento autonomo garantisce la massima indipendenza nella gestione dei consumi.&lt;br/&gt;
+&lt;br/&gt;
+Un'opportunità interessante per chi cerca una soluzione spaziosa a Rieti, adatta tanto a una famiglia numerosa quanto a chi desidera un investimento immobiliare in città, a un prezzo decisamente competitivo per la metratura offerta.&lt;br/&gt;
+&lt;br/&gt;
+Per maggiori informazioni o per fissare una visita, non esitare a contattarci. Saremo felici di accompagnarti nella scoperta di questa proprietà.&lt;br/&gt;
+&lt;br/&gt;
+Immobiliare Malfatti</description>
+      <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T523.aspx#r1</guid>
+      <enclosure url="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/523.jpg" length="0" type="image/jpeg"/>
+      <pubDate>Sun, 23 Aug 2026 08:33:23 +0000</pubDate>
     </item>
   </channel>
 </rss>
