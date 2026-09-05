@@ -7,7 +7,7 @@
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
     <language>it</language>
-    <lastBuildDate>Fri, 04 Sep 2026 12:35:12 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 05 Sep 2026 11:43:37 +0000</lastBuildDate>
     <item>
       <title>Villa in vendita Torricella in Sabina</title>
       <link>https://www.immobiliaremalfatti.it/Villa-in-vendita-roma-Torricella-in-Sabina-T801.aspx</link>
@@ -79,29 +79,6 @@ Per maggiori informazioni o per fissare una visita, non esitare a contattarci. S
 Immobiliare Malfatti</description>
       <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T701.aspx#r0</guid>
       <enclosure url="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/701.jpg" length="0" type="image/jpeg"/>
-      <pubDate>Mon, 13 Jul 2026 10:52:25 +0000</pubDate>
-    </item>
-    <item>
-      <title>Appartamento in vendita Rieti</title>
-      <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T339.aspx</link>
-      <description>&lt;img src="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/339.jpg" /&gt;&lt;br/&gt;CARATTERISTICHE PRINCIPALI:&lt;br/&gt;
-Prezzo: € 69.000&lt;br/&gt;
-Superficie: 70 mq&lt;br/&gt;
-Camere: 2&lt;br/&gt;
-Bagni: 1&lt;br/&gt;
-&lt;br/&gt;
-DESCRIZIONE:&lt;br/&gt;
-A Rieti, proponiamo in vendita un appartamento situato al primo e ultimo piano di un piccolo edificio, con una superficie di circa 70 mq in buono stato generale.&lt;br/&gt;
-&lt;br/&gt;
-La soluzione si compone di due camere da letto, un bagno e spazi abitativi accoglienti, con una distribuzione che risponde alle esigenze di una coppia o di una piccola famiglia. Il riscaldamento è autonomo, garanzia di una gestione indipendente dei consumi.&lt;br/&gt;
-&lt;br/&gt;
-Un'opportunità concreta per chi cerca una prima casa o un investimento nel tessuto urbano di Rieti, proposta a un prezzo accessibile di € 69.000.&lt;br/&gt;
-&lt;br/&gt;
-Per maggiori informazioni o per fissare una visita, non esitare a contattarci. Saremo felici di accompagnarti nella scoperta di questa proprietà.&lt;br/&gt;
-&lt;br/&gt;
-Immobiliare Malfatti</description>
-      <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T339.aspx#r0</guid>
-      <enclosure url="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/339.jpg" length="0" type="image/jpeg"/>
       <pubDate>Mon, 13 Jul 2026 10:52:25 +0000</pubDate>
     </item>
     <item>
@@ -880,6 +857,29 @@ Immobiliare Malfatti</description>
       <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Contigliano-T330.aspx#r2</guid>
       <enclosure url="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/330.jpg" length="0" type="image/jpeg"/>
       <pubDate>Fri, 04 Sep 2026 12:35:12 +0000</pubDate>
+    </item>
+    <item>
+      <title>Appartamento in vendita Rieti</title>
+      <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T339.aspx</link>
+      <description>&lt;img src="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/339.jpg" /&gt;&lt;br/&gt;CARATTERISTICHE PRINCIPALI:&lt;br/&gt;
+Prezzo: € 69.000&lt;br/&gt;
+Superficie: 70 mq&lt;br/&gt;
+Camere: 2&lt;br/&gt;
+Bagni: 1&lt;br/&gt;
+&lt;br/&gt;
+DESCRIZIONE:&lt;br/&gt;
+A Rieti, proponiamo in vendita un appartamento situato al primo e ultimo piano di un piccolo edificio, con una superficie di circa 70 mq in buono stato generale.&lt;br/&gt;
+&lt;br/&gt;
+La soluzione si compone di due camere da letto, un bagno e spazi abitativi accoglienti, con una distribuzione che risponde alle esigenze di una coppia o di una piccola famiglia. Il riscaldamento è autonomo, garanzia di una gestione indipendente dei consumi.&lt;br/&gt;
+&lt;br/&gt;
+Un'opportunità concreta per chi cerca una prima casa o un investimento nel tessuto urbano di Rieti, proposta a un prezzo accessibile di € 69.000.&lt;br/&gt;
+&lt;br/&gt;
+Per maggiori informazioni o per fissare una visita, non esitare a contattarci. Saremo felici di accompagnarti nella scoperta di questa proprietà.&lt;br/&gt;
+&lt;br/&gt;
+Immobiliare Malfatti</description>
+      <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T339.aspx#r1</guid>
+      <enclosure url="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/339.jpg" length="0" type="image/jpeg"/>
+      <pubDate>Sat, 05 Sep 2026 11:43:37 +0000</pubDate>
     </item>
   </channel>
 </rss>
