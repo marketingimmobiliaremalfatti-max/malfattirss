@@ -7,7 +7,7 @@
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
     <language>it</language>
-    <lastBuildDate>Tue, 24 Nov 2026 19:25:25 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 25 Nov 2026 18:31:06 +0000</lastBuildDate>
     <item>
       <title>Appartamento in vendita Arrone</title>
       <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Arrone-T413.aspx</link>
@@ -447,31 +447,6 @@ Immobiliare Malfatti</description>
     </item>
     <item>
       <title>Appartamento in vendita Rieti</title>
-      <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T311.aspx</link>
-      <description>&lt;img src="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/311.jpg" /&gt;&lt;br/&gt;CARATTERISTICHE PRINCIPALI:&lt;br/&gt;
-Prezzo: € 119.000&lt;br/&gt;
-Superficie: 80 mq&lt;br/&gt;
-Camere: 2&lt;br/&gt;
-Bagni: 1 Box: Box singolo&lt;br/&gt;
-&lt;br/&gt;
-DESCRIZIONE:&lt;br/&gt;
-Nel cuore di Rieti, proponiamo in vendita un appartamento ristrutturato di 80 mq, situato al primo e ultimo piano, con una distribuzione degli spazi curata e funzionale.&lt;br/&gt;
-&lt;br/&gt;
-L'immobile è composto da due camere da letto, un bagno e un cucinotto, in un assetto ideale per una coppia o una piccola famiglia. Lo stato interno ristrutturato garantisce la possibilità di abitarlo da subito, senza necessità di ulteriori interventi.&lt;br/&gt;
-&lt;br/&gt;
-A completare la proposta, un comodo box singolo, elemento di grande praticità nel contesto urbano. Il riscaldamento autonomo permette inoltre una gestione flessibile e indipendente dei consumi.&lt;br/&gt;
-&lt;br/&gt;
-Un'opportunità interessante per chi cerca una prima casa o un investimento nel centro di Rieti, a un prezzo accessibile e in un immobile già pronto all'uso.&lt;br/&gt;
-&lt;br/&gt;
-Per maggiori informazioni o per fissare una visita, non esitare a contattarci. Saremo felici di accompagnarti nella scoperta di questa proprietà.&lt;br/&gt;
-&lt;br/&gt;
-Immobiliare Malfatti</description>
-      <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T311.aspx#r0</guid>
-      <enclosure url="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/311.jpg" length="0" type="image/jpeg"/>
-      <pubDate>Thu, 12 Nov 2026 16:39:16 +0000</pubDate>
-    </item>
-    <item>
-      <title>Appartamento in vendita Rieti</title>
       <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T305.aspx</link>
       <description>&lt;img src="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/305.jpg" /&gt;&lt;br/&gt;CARATTERISTICHE PRINCIPALI:&lt;br/&gt;
 Prezzo: € 129.000&lt;br/&gt;
@@ -859,6 +834,31 @@ Immobiliare Malfatti</description>
       <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Palazzo---Stabile-in-vendita-roma-Cittaducale-T309.aspx#r1</guid>
       <enclosure url="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/309.jpg" length="0" type="image/jpeg"/>
       <pubDate>Tue, 24 Nov 2026 19:25:25 +0000</pubDate>
+    </item>
+    <item>
+      <title>Appartamento in vendita Rieti</title>
+      <link>https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T311.aspx</link>
+      <description>&lt;img src="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/311.jpg" /&gt;&lt;br/&gt;CARATTERISTICHE PRINCIPALI:&lt;br/&gt;
+Prezzo: € 119.000&lt;br/&gt;
+Superficie: 80 mq&lt;br/&gt;
+Camere: 2&lt;br/&gt;
+Bagni: 1 Box: Box singolo&lt;br/&gt;
+&lt;br/&gt;
+DESCRIZIONE:&lt;br/&gt;
+Nel cuore di Rieti, proponiamo in vendita un appartamento ristrutturato di 80 mq, situato al primo e ultimo piano, con una distribuzione degli spazi curata e funzionale.&lt;br/&gt;
+&lt;br/&gt;
+L'immobile è composto da due camere da letto, un bagno e un cucinotto, in un assetto ideale per una coppia o una piccola famiglia. Lo stato interno ristrutturato garantisce la possibilità di abitarlo da subito, senza necessità di ulteriori interventi.&lt;br/&gt;
+&lt;br/&gt;
+A completare la proposta, un comodo box singolo, elemento di grande praticità nel contesto urbano. Il riscaldamento autonomo permette inoltre una gestione flessibile e indipendente dei consumi.&lt;br/&gt;
+&lt;br/&gt;
+Un'opportunità interessante per chi cerca una prima casa o un investimento nel centro di Rieti, a un prezzo accessibile e in un immobile già pronto all'uso.&lt;br/&gt;
+&lt;br/&gt;
+Per maggiori informazioni o per fissare una visita, non esitare a contattarci. Saremo felici di accompagnarti nella scoperta di questa proprietà.&lt;br/&gt;
+&lt;br/&gt;
+Immobiliare Malfatti</description>
+      <guid isPermaLink="false">https://www.immobiliaremalfatti.it/Appartamento-in-vendita-roma-Rieti-T311.aspx#r1</guid>
+      <enclosure url="https://marketingimmobiliaremalfatti-max.github.io/malfattirss/images/311.jpg" length="0" type="image/jpeg"/>
+      <pubDate>Wed, 25 Nov 2026 18:31:06 +0000</pubDate>
     </item>
   </channel>
 </rss>
